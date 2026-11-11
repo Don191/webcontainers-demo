@@ -1,7 +1,7 @@
 import { emitKeypressEvents } from 'node:readline'
 import { createWorkerClient, DASHBOARD_PORT, isFinished, jobTypes } from '@demo/jobs'
 import { bar, clock, duration, filters, fit, statusStyle, windowAround } from './format.js'
-import { beside, box, c, paint, screen, width } from './screen.js'
+import { beside, box, c, fitAnsi, paint, screen, width } from './screen.js'
 
 const POLL_MS = 1000
 
@@ -210,12 +210,12 @@ export class App {
   render(cols, rows) {
     const { worker, mode, view } = this.state
     const services = this.manager.services
-    const wide = cols >= 96
+    const wide = cols >= 90
     const leftW = wide ? Math.floor(cols * 0.58) : cols
     const listRows = Math.max(3, rows - 10)
 
-    const header = `${c.bold(c.magenta(' Jobs demo'))}${c.dim('  terminal UI · services, queue and jobs')}`
-    const right = c.dim(`${worker.node ? `node ${worker.node}  ` : ''}${clock(new Date().toISOString())} `)
+    const header = `${c.bold(c.magenta(' Jobs demo'))}${c.dim(cols >= 70 ? '  terminal UI · services, queue and jobs' : '')}`
+    const right = c.dim(`${worker.node && cols >= 90 ? `node ${worker.node}  ` : ''}${clock(new Date().toISOString())} `)
     const lines = [header + ' '.repeat(Math.max(1, cols - width(header) - width(right))) + right]
 
     lines.push(...box({ title: `${c.bold('Services')} ${c.dim('w/d start or stop · W/D restart · l logs')}`, w: cols, rows: services.length + 1, lines: [
@@ -242,7 +242,9 @@ export class App {
 
     lines.push(...beside(left, rightPanel))
     lines.push(this.footer())
-    return lines
+    // Never wider or taller than the terminal: a wrapped line would scroll
+    // the whole screen up by one.
+    return lines.slice(0, rows).map(l => fitAnsi(l, cols))
   }
 
   serviceLine(s) {

@@ -16,3 +16,14 @@ test('box lines are all the same width', () => {
   assert.equal(lines.length, 5)
   assert.ok(lines.every(l => width(l) === 20))
 })
+
+test('a rendered screen fits the terminal exactly', async () => {
+  const { App } = await import('./app.js')
+  const { ServiceManager } = await import('./services.js')
+  const app = new App({ manager: new ServiceManager(), stdin: { isTTY: false }, stdout: {} })
+  for (const [cols, rows] of [[60, 20], [100, 30], [140, 40]]) {
+    const lines = app.render(cols, rows)
+    assert.ok(lines.length <= rows, `${lines.length} lines for ${rows} rows`)
+    assert.ok(lines.every(l => width(l) === cols), `every line is ${cols} wide`)
+  }
+})
