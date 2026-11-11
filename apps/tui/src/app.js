@@ -210,7 +210,7 @@ export class App {
   render(cols, rows) {
     const { worker, mode, view } = this.state
     const services = this.manager.services
-    const wide = cols >= 90
+    const wide = cols >= 80
     const leftW = wide ? Math.floor(cols * 0.58) : cols
     const listRows = Math.max(3, rows - 10)
 
@@ -234,7 +234,10 @@ export class App {
             ...keys.map(([k, what]) => `${c.magenta(fit(k, 6))}${what}`),
             c.dim('Any key to go back')
           ] })
-        : this.jobList(leftW, listRows)
+        : !wide && view !== 'job'
+          // Too narrow for two panels: the log takes the list's place.
+          ? this.serviceLog(services.find(s => s.id === view), cols, listRows)
+          : this.jobList(leftW, listRows)
 
     const rightPanel = !wide
       ? []
