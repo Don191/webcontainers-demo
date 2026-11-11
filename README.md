@@ -30,7 +30,7 @@ In the TUI: `↑` `↓` select a job, `n` start one, `c` cancel, `r` retry, `p` 
 ## Tooling
 
 - **Yarn 4**, with the release checked in at `.yarn/releases` and `yarnPath` pointing at it. Anything that can run Node can run `node .yarn/releases/yarn-4.18.1.cjs`, including a WebContainer with no Volta or Corepack.
-- **Nx** runs the `dev`, `build` and `test` targets across the workspaces. Targets come from each app's `package.json` scripts. The daemon and the Nx terminal UI are turned off in `nx.json`, since neither works in a WebContainer.
+- **Nx** runs the `dev`, `build` and `test` targets across the workspaces. Targets come from each app's `package.json` scripts. The daemon and the Nx terminal UI are turned off in `nx.json` to keep it simple inside a WebContainer.
 - **Volta** pins Node and Yarn for local work. A WebContainer brings its own Node and ignores this.
 
 ### What makes it WebContainer friendly
