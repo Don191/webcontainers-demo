@@ -8,19 +8,26 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "node apps/tui/src/index.js",
+    "tui": "yarn workspace @demo/tui start",
     "dev": "nx run-many -t dev -p @demo/worker @demo/dashboard --outputStyle=stream",
     "dev:plain": "node scripts/dev.mjs",
-    "tui": "yarn workspace @demo/tui start",
     "build": "nx run-many -t build",
     "test": "nx run-many -t test",
     "graph": "nx graph"
   },
   "devDependencies": {
+    "@rolldown/binding-wasm32-wasi": "1.2.18",
     "nx": "~21.6.10"
   },
   "packageManager": "yarn@4.18.1",
   "volta": {
     "node": "24.22.2",
     "yarn": "4.18.1"
+  },
+  "resolutions": {
+    "rollup": "npm:@rollup/wasm-node@^4.60.0",
+    "lightningcss": "npm:lightningcss-wasm@^1.33.0",
+    "esbuild": "npm:esbuild-wasm@^0.28.0"
   }
 }
