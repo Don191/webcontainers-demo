@@ -1,0 +1,10 @@
+{
+  "name": "@demo/jobs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Job types, statuses and a small client for the worker's HTTP API. Shared by the dashboard and the TUI.",
+  "exports": {
+    ".": "./src/index.js"
+  }
+}

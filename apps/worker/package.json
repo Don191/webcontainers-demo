@@ -1,0 +1,15 @@
+{
+  "name": "@demo/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Runs fake background jobs and serves them over a small HTTP API.",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "test": "node --test \"src/**/*.test.js\""
+  },
+  "dependencies": {
+    "@demo/jobs": "workspace:*"
+  }
+}

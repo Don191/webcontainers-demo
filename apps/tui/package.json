@@ -1,0 +1,19 @@
+{
+  "name": "@demo/tui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A terminal UI for the demo: component status, and a job list you can start, cancel and retry from.",
+  "bin": {
+    "demo-tui": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test \"src/**/*.test.js\""
+  },
+  "dependencies": {
+    "@demo/jobs": "workspace:*",
+    "ink": "^6.8.0",
+    "react": "^19.2.0"
+  }
+}

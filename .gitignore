@@ -1,0 +1,13 @@
+node_modules
+.nx
+.nuxt
+.output
+.data
+dist
+*.log
+.DS_Store
+
+# Yarn: keep the checked-in release, ignore the rest
+.yarn/*
+!.yarn/releases
+.pnp.*

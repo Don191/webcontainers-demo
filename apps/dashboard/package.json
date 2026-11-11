@@ -1,0 +1,21 @@
+{
+  "name": "@demo/dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A Nuxt UI dashboard for starting fake jobs and watching them run. Cut down from nuxt-ui-templates/dashboard.",
+  "scripts": {
+    "dev": "nuxt dev --port 3000",
+    "build": "nuxt build",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@demo/jobs": "workspace:*",
+    "@iconify-json/lucide": "^1.2.152",
+    "@nuxt/ui": "^4.12.0",
+    "@vueuse/core": "^14.4.0",
+    "nuxt": "^4.6.4",
+    "tailwindcss": "^4.3.5",
+    "vue": "^3.5.45"
+  }
+}
